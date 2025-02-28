@@ -9,24 +9,10 @@
 #SBATCH --partition=agap_long                # Partition to use
 
 # The script calculates statistics for genomic files that have been split by chromosome.
-# It uses the seqkit tool to compute statistics for each chromosome and saves the results to a specified file.
+# It uses the seqkit tool to compute the lengh for each sequence and saves the results to a specified file.
 
 # Modules required to run the script
 module load bioinfo-cirad
 module load seqkit/2.8.1
 
-# Define paths for the genome and output directories
-GENOME_DIR="/home/barrientosm/projects/GE2POP/2024_TRANS_CWR/2024_MANUEL_BARRIENTOS/02_results/speltoides/GeMo_stats/seq_YANG"  # Path to the split genome files
-OUTPUT_DIR="/home/barrientosm/projects/GE2POP/2024_TRANS_CWR/2024_MANUEL_BARRIENTOS/02_results/speltoides/GeMo_stats"  # Path for the output
-
-# Navigate to the directory containing the chromosome-specific genome files
-cd $GENOME_DIR
-
-# Run seqkit to compute statistics for all files with "fa" in their names (representing chromosome files).
-# -a includes all information (sequence length, GC content, etc.)
-# -T adds extra statistics.
-# The results are saved to the output directory.
-seqkit stats -a -T *fa* > $OUTPUT_DIR/stats_by_chromosome_YANG_2023.txt
-
-# Print status message indicating that the statistics have been computed
-echo "Genome statistics have been computed and saved to $OUTPUT_DIR/stats_by_chromosome_YANG_2023.txt"
+seqkit fx2tab -n -l /home/barrientosm/projects/GE2POP/2024_TRANS_CWR/2024_MANUEL_BARRIENTOS/data_RNAseq/Reference_individuals_fasta/New_T_urartu_Tr246_URA09.fasta >  transcriptome_stats_urartu_TrEx_per_sequence.txt
